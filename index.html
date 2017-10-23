@@ -1,0 +1,17 @@
+<!doctype html>
+<html ng-app="myApp">
+    <head>
+        <title>Angular Fall 2017 GemStore</title>
+    </head>
+    <body>
+        <div ng-controller="myController as mc">
+        </div>
+        <div ng-init="mc.Initialized()">
+        </div>
+        <!--Below is my custom directive.  Watch for the camel to snake-case change! It's camel-cased in javascript, but snake-cased in HTML-->
+        <my-directive></my-directive>
+        <my-other-directive></my-other-directive>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
