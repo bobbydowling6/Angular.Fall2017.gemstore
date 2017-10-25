@@ -4,7 +4,18 @@ price: 2.95,
 description: 'Some gems have hidden qualities beyond their lustre, beyond their shine... Dodecahedron is one of those gems',
 canPurchase: true,
 outOfStock: false,
-image: 'images/gem-01.gif'
+image: 'images/gem-01.gif',
+reviews: [
+    {
+        stars: 5,
+        author: 'josephj@codingtemple',
+        body: 'I love this product!'
+    }, {
+        stars: 2,
+        author: 'ripalr@codingtemple',
+        body: 'I hate this product'
+    }
+]
 }, {
         name: "Pentagonal Gem",
         price: 5.95,
@@ -64,6 +75,24 @@ app.directive("storePanels", function() {
     return directiveObject;
 })
 
+app.directive("storeReviews", function(){
+    var directObject = {
+        templateUrl: "templates/store-reviews.html",
+        controller: function($scope) {
+            $scope.AddReview = function(product) {
+               //Just to be safe, make sure to add a reviews array if it doesn't already exist
+		if(!product.reviews){
+			product.reviews = [];
+		}
+		product.reviews.push($scope.newReview);
+
+            //This resets the review
+            $scope.newReview = {};
+            }
+        }
+    };
+    return directObject;
+})
 
 //app.directive("myDirective", function (){
 //var directObject = {
