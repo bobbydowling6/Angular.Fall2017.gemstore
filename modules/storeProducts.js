@@ -31,7 +31,8 @@ storeProducts.directive("storeReviews", function () {
                 if (!product.reviews) {
                     product.reviews = [];
                 }
-                firebase.database().ref('/products/'+CryptoJS.MD5(product.name)+'/reviews/'+CryptoJS.MD5($scope.review.author)).set($scope.review);
+                firebase.database().ref('/products/'+CryptoJS.MD5(product.name)+'/reviews/'+CryptoJS.MD5($scope.newReview.author)).set($scope.newReview);
+
                 product.reviews.push($scope.newReview);
 
                 //This resets the review
