@@ -1,0 +1,25 @@
+<div class="row" ng-controller="myController" ng-init="Initialized()">
+
+            <div class="col-xs-4" ng-repeat="model in models">
+                <div class="panel-body">
+                    <div class="panel panel-default" ng-show="model.canPurchase">
+                        <div class="panel-heading">
+                            {{model.name}}
+                        </div>
+                        <p class="pull-right"> {{model.price | currency}} </p>
+                        <p>
+                            <img class="img-responsive" ng-src="{{model.image}}" />
+                        </p>
+                        <!-- Attribute-based directive-->
+                        <div store-panels>
+                        </div>
+                        <button ng-disabled="model.outOfStock" class="btn btn-default">Add to Cart</button>
+                        <div ng-show="model.outOfStock" class="alert alert-danger">
+                            <p>We're out of Stock!</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
