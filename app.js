@@ -10,22 +10,51 @@ app.config(function ($routeProvider, $locationProvider) {
         templateUrl: "templates/page1.html"
     }).when("/page2", {
         templateUrl: "templates/page2.html"
-        , controller: function () {}
+        }).when("/login", {
+        templateUrl: "templates/login.html"
     });
 });
 
-
-var storeProducts = angular.module("storeProducts", []);
-//Once I have a reference to the app module, I can add other services, controllers, filters, and directives to it using built-in functions.  In this case, passing two arguments to the controller method will create a new controller
 function myController($scope, $http) {
     $scope.Initialized = function () {
-        $http.get("gems.json").then(function(result){
-            $scope.models = result.data;
-        });
-    }
-}
+        $http.get("gems.json").then($scope.gemDataReceived);
 
+        }
+        $scope.gemDataReceived = function (result){
+            $scope.models = result.data;
+        }
+
+    }
 app.controller("myController", ['$scope', '$http', myController]);
+
+app.controller("bodyController", function($scope){
+
+    $scope.register = function(email, password) {   firebase.auth().createUserWithEmailAndPassword(email, password)
+
+    }
+
+    $scope.login = function (email, password) {
+        firebase.auth().signInWithEmailAndPassword(email, password);
+    }
+
+    $scope.logout = function(){
+        firebase.auth().signOut()
+    };
+
+    $scope.onAuthStateChanged = firebase.auth().onAuthStateChanged(function (user) {
+
+    if (user) {
+
+        $scope.user = user;
+        $scope.$apply();
+    }
+    else {
+        $scope.user = null;
+        $scope.$apply();
+    }
+});
+
+})
 
 //I can also attach directives to modules:
 //app.directive("myDirective", function(){
